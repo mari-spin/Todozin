@@ -1,9 +1,9 @@
-import Menu from "./components/Menu";
+import TodayPage from "./Pages/Today";
 
 export default function App() {
     return (
     <>
-        <Menu/>
+        <TodayPage/>
     </>
     );
 }
