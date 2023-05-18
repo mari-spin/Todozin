@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ListCheckbox = () => {
+const CheckboxList = () => {
 
     const [lists, setLists] = useState([]);
     const [newList, setNewList] = useState('');
@@ -59,4 +59,4 @@ const ListCheckbox = () => {
     )
 }
 
-export default ListCheckbox
+export default CheckboxList

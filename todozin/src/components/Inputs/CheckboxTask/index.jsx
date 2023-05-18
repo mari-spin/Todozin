@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const TaskList = () => {
+const CheckboxTask = () => {
 
     const [tasks, setTasks] = useState([]);
     const [newTask, setNewTask] = useState('');
@@ -59,4 +59,4 @@ const TaskList = () => {
     )
 }
 
-export default TaskList
+export default CheckboxTask

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import searchIcon from "../../../assets/icon/searchIcon.svg";
+import { SeachBarStyle } from "./style";
 
 const SearchBar = () => {
 
@@ -16,7 +17,7 @@ const SearchBar = () => {
 
     return (
         <form onSubmit={handleFormSubmit}>
-            <input 
+            <SeachBarStyle 
                 type="text"
                 placeholder="Search..."
                 value={searchTerm}

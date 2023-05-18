@@ -1,10 +1,10 @@
-import ListCheckbox from "../Inputs/CheckboxList"
+import CheckboxTask from "../Inputs/CheckboxTask"
 
 const TodaySection = () => {
     return (
         <section>
             <h2>Today</h2>
-            <ListCheckbox/>
+            <CheckboxTask/>
         </section>
     )
 }

@@ -1,6 +1,7 @@
-import ListCheckbox from "../../components/Inputs/CheckboxList"
+import CheckboxList from "../../components/Inputs/CheckboxList"
 import Menu from "../../components/MenuNavegation"
 import ListTitle from "../../components/Title/ListTitle"
+
 import { FlexWrapper } from "../../style/wrapper"
 
 const ListPage = () => {
@@ -8,7 +9,7 @@ const ListPage = () => {
         <FlexWrapper>
             <Menu/>
             <ListTitle/>
-            <ListCheckbox/>
+            <CheckboxList/>
         </FlexWrapper>
     )
 }
