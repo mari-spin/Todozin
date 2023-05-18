@@ -3,7 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-//import App from './App.jsx';
+import App from './App.jsx';
+
 import All from './Pages/All/index.jsx';
 import Calendar from './Pages/Calendar/index.jsx';
 import ListPage from './Pages/List/index.jsx';
@@ -42,5 +43,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router}/>
+      <App/>
+    
   </React.StrictMode>,
 )
