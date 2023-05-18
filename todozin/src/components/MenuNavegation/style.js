@@ -11,4 +11,9 @@ export const MenuSectionStyle = styled.section`
     justify-content: left;
     flex-direction:column;
     gap: 2rem;
+
+    .avocado-img{
+        width: 150px;
+        margin: 0 auto;
+    }
 `

@@ -11,7 +11,7 @@ const Menu = () => {
     return (
         <MenuSectionStyle>
             <HeaderMenu/>
-            <img src={avocadoCoffee}/>
+            <img src={avocadoCoffee} className="avocado-img"/>
             <SearchBar/>
             <nav>
                 <TaskMenuSection/>
