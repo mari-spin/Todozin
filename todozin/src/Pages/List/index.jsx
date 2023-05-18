@@ -1,5 +1,5 @@
 import ListCheckbox from "../../components/Inputs/CheckboxList"
-import Menu from "../../components/Menu"
+import Menu from "../../components/MenuNavegation"
 import ListTitle from "../../components/Title/ListTitle"
 
 const ListPage = () => {
