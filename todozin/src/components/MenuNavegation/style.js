@@ -17,3 +17,32 @@ export const MenuSectionStyle = styled.section`
         margin: 0 auto;
     }
 `
+
+export const ListContainer = styled.li`
+    margin-bottom: 2rem;
+    
+`
+
+
+export const ListStyle = styled.li`
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+
+
+`
+
+export const ListItemStyle = styled.li`
+    & > a {
+        display: flex;
+        flex-direction: row;
+        gap: 1vw;
+
+        transition: ease-in-out 200ms;
+    }
+
+    & > a:hover {
+        gap: 2vw;
+    }
+` 
+

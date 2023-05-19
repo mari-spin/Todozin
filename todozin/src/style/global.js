@@ -26,10 +26,16 @@ const GlobalStyle = createGlobalStyle`
     h2,
     h3 {
         font-family: Bebas Neue;
+        
+        text-transform: uppercase;
     }
 
-    p {
+    p, 
+    li {
         font-family: Urbanist;
+        font-weight: bold;
+
+        text-transform: uppercase;
     }
 `
 
