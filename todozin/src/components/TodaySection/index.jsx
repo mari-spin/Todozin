@@ -1,11 +1,12 @@
 import CheckboxTask from "../Inputs/CheckboxTask"
+import { TodaySectionStyle } from "./style"
 
 const TodaySection = () => {
     return (
-        <section>
+        <TodaySectionStyle>
             <h2>Today</h2>
             <CheckboxTask/>
-        </section>
+        </TodaySectionStyle>
     )
 }
 export default TodaySection

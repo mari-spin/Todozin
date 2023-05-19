@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AddNewButtonStyle, AddNewInputStyle, TaskWrapperStyle } from "../style";
 
 const CheckboxTask = () => {
 
@@ -30,15 +31,15 @@ const CheckboxTask = () => {
     };
 
     return (
-    <div>
+    <TaskWrapperStyle borderRadius={"0 10px 10px 10px"}>
         <div>
-            <input
-            type="text"
-            value={newTask}
-            onChange={handleInputChange}
-            placeholder="Enter a new task"
+            <AddNewInputStyle
+                type="text"
+                value={newTask}
+                onChange={handleInputChange}
+                placeholder="Enter a new task"
             />
-            <button onClick={handleAddTask}>Add Task</button>
+            <AddNewButtonStyle onClick={handleAddTask}>Add Task</AddNewButtonStyle>
         </div>
         
         <ul>
@@ -55,7 +56,7 @@ const CheckboxTask = () => {
             </li>
             ))}
         </ul>
-    </div>
+    </TaskWrapperStyle>
     )
 }
 
