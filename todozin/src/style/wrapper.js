@@ -6,6 +6,8 @@ export const FlexWrapper = styled.div`
     justify-content: space-between;
     align-items: start;
     
+    max-width: 1300px;
     width: 100%;
-    padding: 1rem;
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
 `
