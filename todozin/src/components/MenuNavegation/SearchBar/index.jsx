@@ -1,6 +1,6 @@
 import { useState } from "react";
 import searchIcon from "../../../assets/icon/searchIcon.svg";
-import { SeachBarStyle } from "./style";
+import { ButtonStyle, FormStyle, SeachBarStyle } from "./style";
 
 const SearchBar = () => {
 
@@ -16,15 +16,17 @@ const SearchBar = () => {
     };
 
     return (
-        <form onSubmit={handleFormSubmit}>
+        <FormStyle onSubmit={handleFormSubmit}>
             <SeachBarStyle 
                 type="text"
                 placeholder="Search..."
                 value={searchTerm}
                 onChange={handleInputChange}
             />
-            <button type="submit"><img src={searchIcon} alt="Search"/></button>
-        </form>
+            <ButtonStyle type="submit">
+                <img src={searchIcon} alt="Search"/>
+            </ButtonStyle>
+        </FormStyle>
     )
 }
 
