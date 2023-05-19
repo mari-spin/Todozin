@@ -31,10 +31,12 @@ const GlobalStyle = createGlobalStyle`
     }
 
     p, 
-    li {
+    li,
+    input {
         font-family: Urbanist;
         font-weight: bold;
-
+        font-size: 1rem;
+        
         text-transform: uppercase;
     }
 `

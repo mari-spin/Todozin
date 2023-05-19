@@ -3,7 +3,10 @@ import { styled } from "styled-components";
 export const MenuSectionStyle = styled.section`
     background-color: var(--green-light);
 
-    height: 100vh;
+    min-height: 90vh;
+    min-width: fit-content;
+
+    overflow: auto;
 
     padding: 1rem;
 

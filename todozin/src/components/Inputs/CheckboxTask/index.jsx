@@ -1,5 +1,8 @@
-import { useState } from "react";
 import { AddNewButtonStyle, AddNewInputStyle, TaskWrapperStyle } from "../style";
+
+import { useState } from "react";
+
+import addCircle from "../../../assets/icon/addcircle.svg";
 
 const CheckboxTask = () => {
 
@@ -32,14 +35,15 @@ const CheckboxTask = () => {
 
     return (
     <TaskWrapperStyle borderRadius={"0 10px 10px 10px"}>
-        <div>
+        
+        <div className="newInput--wrapper">
+            <AddNewButtonStyle onClick={handleAddTask}><img src={addCircle} alt="add new task"/></AddNewButtonStyle>
             <AddNewInputStyle
                 type="text"
                 value={newTask}
                 onChange={handleInputChange}
                 placeholder="Enter a new task"
             />
-            <AddNewButtonStyle onClick={handleAddTask}>Add Task</AddNewButtonStyle>
         </div>
         
         <ul>
@@ -51,8 +55,8 @@ const CheckboxTask = () => {
                 />
 
                 {task}
-                
                 <button onClick={() => handleDeleteTask(index)}>Delete</button>
+                
             </li>
             ))}
         </ul>
