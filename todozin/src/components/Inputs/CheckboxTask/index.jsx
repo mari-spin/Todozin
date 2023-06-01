@@ -8,7 +8,8 @@ import addCircle from "../../../assets/icon/addcircle.svg";
 const CheckboxTask = () => {
     const [posts, setPosts] = useState([])
     const [newPostTask, setNewPostTask] = useState('');
-    
+    const [completedPosts, setCompletedPosts] = useState([]);
+
     const urlTask = "http://localhost:3000/task"
     
     useEffect(() => {
@@ -35,7 +36,8 @@ const CheckboxTask = () => {
             const response = await axios.post(urlTask, {
                 name: newPostTask,
                 date: currentDate,
-                description: null
+                description: null,
+                checked:false
             })
             setPosts([...posts, response.data])
             setNewPostTask('')
@@ -56,6 +58,11 @@ const CheckboxTask = () => {
         })
         setPosts(updatedPosts)
     }
+
+    useEffect(() => {
+        const completed = posts.filter((post) =>post.checked)
+        setCompletedPosts(completed)
+    }, [posts])
 
     const deletePost = async (postId) => {
         try {
@@ -90,11 +97,17 @@ const CheckboxTask = () => {
                 checked={post.checked || false}
                 onChange={() => handleCheckboxChange(post.id)}
                 />
-
-                {post.name} - {post.date}
-                
+                    {post.name} - {post.date}
                 <button onClick={() => deletePost(post.id)}>Delete</button>
             </li>
+            ))}
+        </ul>
+        <h2>Concluded Tasks</h2>
+        <ul>
+            {completedPosts.map((post) => (
+                <li key={post.id}>
+                    {post.name} - {post.date}
+                </li>
             ))}
         </ul>
     </TaskWrapperStyle>

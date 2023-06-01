@@ -13,12 +13,5 @@
       "icon": ""
     }
   ],
-  "task": [
-    {
-      "name": "test",
-      "date": "6/1/2023",
-      "description": null,
-      "id": 1
-    }
-  ]
+  "task": []
 }
