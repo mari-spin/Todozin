@@ -17,26 +17,29 @@ const router = createBrowserRouter([
     path:"/",
     element:<TodayPage/>,
     errorElement: <ErrorPage />, 
-  },
-  {
-    path:"/all",
-    element:<All/>,
-    errorElement: <ErrorPage />, 
-  },
-  {
-    path:"/calendar",
-    element:<Calendar/>,
-    errorElement: <ErrorPage />, 
-  },
-  {
-    path:"/list/newlist",
-    element:<ListPage/>,
-    errorElement: <ErrorPage />, 
-  },
-  {
-    path:"/list/persona",
-    element:<PersonalList/>,
-    errorElement: <ErrorPage />, 
+    children: [
+      {
+        path:"all",
+        element:<All/>,
+        errorElement: <ErrorPage />, 
+      },
+      {
+        path:"calendar",
+        element:<Calendar/>,
+        errorElement: <ErrorPage />, 
+        
+      },
+      {
+        path:"list/newlist",
+        element:<ListPage/>,
+        errorElement: <ErrorPage />, 
+      },
+      {
+        path:"list/:personaID",
+        element:<PersonalList/>,
+        errorElement: <ErrorPage />, 
+      },
+    ]
   },
 ])
 

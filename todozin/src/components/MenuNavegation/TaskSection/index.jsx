@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom"
+
 import allIcon from "../../../assets/icon/all.svg"
 import calendarIcon from "../../../assets/icon/calendar.svg"
 import todayIcon from "../../../assets/icon/today.svg"
+
 import { ListContainer, ListItemStyle, ListStyle } from "../style"
 
 const TaskMenuSection = () => {.0
@@ -14,7 +16,7 @@ const TaskMenuSection = () => {.0
                         <Link to="/"><img src={todayIcon}/>Today</Link>
                     </ListItemStyle>
                     <ListItemStyle>
-                        <Link to="/all"><img src={allIcon}/>All</Link>
+                        <Link to="all"><img src={allIcon}/>All</Link>
                     </ListItemStyle>
                     <ListItemStyle>
                         <Link to="calendar">

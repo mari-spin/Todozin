@@ -30,7 +30,7 @@ export const ListContainer = styled.li`
 `
 
 
-export const ListStyle = styled.li`
+export const ListStyle = styled.ul`
     display: flex;
     flex-direction: column;
     gap: 1vh;

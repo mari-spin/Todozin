@@ -1,52 +1,24 @@
 {
-    "list" : [
-        {
-            "id": 1,
-            "name": "Personal",
-            "description": "My daily stuff",
-            "icon":""
-        },
-        {
-            "id": 2,
-            "name": "Market",
-            "description": "My market list",
-            "icon":""
-
-        }
-    ],
-    "task" : [
-        {
-            "id": 2,
-            "name": "Grapes",
-            "description": null,
-            "date":"05/25/2023",
-            "subtask": [
-                {
-                    "name": null
-                }
-            ],
-            "list": [
-                {
-                    "id": 2
-                }
-            ]
-        },
-        {
-            "id": 1,
-            "name": "Vet",
-            "description": "Pagu Vaccine at Petz",
-            "date":"05/23/2023",
-            "subtask": [
-                {
-                    "name": "Buy meds"
-                }
-            ],
-            "list": [
-                {
-                    "id": 1
-                    
-                }
-            ]
-        }
-    ]
+  "list": [
+    {
+      "id": 1,
+      "name": "Personal",
+      "description": "My daily stuff",
+      "icon": ""
+    },
+    {
+      "id": 2,
+      "name": "Market",
+      "description": "My market list",
+      "icon": ""
+    }
+  ],
+  "task": [
+    {
+      "name": "test",
+      "date": "6/1/2023",
+      "description": null,
+      "id": 1
+    }
+  ]
 }

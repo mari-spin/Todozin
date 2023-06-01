@@ -1,4 +1,8 @@
 import { useState } from "react";
+import { AddNewButtonStyle, AddNewInputStyle, TaskWrapperStyle } from "../style";
+
+import addCircle from "../../../assets/icon/addcircle.svg";
+
 
 const CheckboxList = () => {
 
@@ -30,15 +34,15 @@ const CheckboxList = () => {
     };
 
     return (
-    <div>
-        <div>
-            <input
+    <TaskWrapperStyle>
+        <div className="newInput--wrapper">
+            <AddNewButtonStyle onClick={handleAddList}><img src={addCircle }/></AddNewButtonStyle>
+            <AddNewInputStyle
             type="text"
             value={newList}
             onChange={handleInputChange}
             placeholder="Create a new list"
             />
-            <button onClick={handleAddList}>Add List</button>
         </div>
         
         <ul>
@@ -55,7 +59,7 @@ const CheckboxList = () => {
             </li>
             ))}
         </ul>
-    </div>
+    </TaskWrapperStyle>
     )
 }
 

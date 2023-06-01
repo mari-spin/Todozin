@@ -1,62 +1,99 @@
 import { AddNewButtonStyle, AddNewInputStyle, TaskWrapperStyle } from "../style";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+import axios from "axios";
 import addCircle from "../../../assets/icon/addcircle.svg";
 
 const CheckboxTask = () => {
-
-    const [tasks, setTasks] = useState([]);
-    const [newTask, setNewTask] = useState('');
+    const [posts, setPosts] = useState([])
+    const [newPostTask, setNewPostTask] = useState('');
     
-    const handleInputChange = (event) => {
-        setNewTask(event.target.value);
-    };
+    const urlTask = "http://localhost:3000/task"
+    
+    useEffect(() => {
+        fetchPosts()
+    }, [])
 
-    const handleAddTask = () => {
-        if (newTask.trim() !== '') {
-            setTasks([...tasks, newTask]);
-            setNewTask('');
+    const fetchPosts = async () => {
+        try {
+            const response = await axios.get(urlTask)
+            setPosts(response.data)
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const createPost = async () => {
+        try {
+            const currentDate = new Date().toLocaleDateString('en-US', {
+                month: 'numeric',
+                day: 'numeric',
+                year: 'numeric'
+            });
+
+            const response = await axios.post(urlTask, {
+                name: newPostTask,
+                date: currentDate,
+                description: null
+            })
+            setPosts([...posts, response.data])
+            setNewPostTask('')
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const handleCheckboxChange = (postsId) => {
+        const updatedPosts = posts.map((post) => {
+            if (post.id === postsId) {
+                return {
+                    ...post,
+                    checked: !post.checked
+                }
+            }
+            return post
+        })
+        setPosts(updatedPosts)
+    }
+
+    const deletePost = async (postId) => {
+        try {
+            await axios.delete(`${urlTask}/${postId}`);
+            const updatedPosts = posts.filter((post) => post.id !== postId);
+            setPosts(updatedPosts);
+        } 
+        catch (error) {
+            console.error(error);
         }
     };
-
-
-    const handleTaskCompletion = (index) => {
-        const updatedTasks = [...tasks];
-        updatedTasks[index] = <del>{updatedTasks[index]}</del>;
-        setTasks(updatedTasks);
-    };
     
-    const handleDeleteTask = (index) => {
-        const updatedTasks = [...tasks];
-        updatedTasks.splice(index, 1);
-        setTasks(updatedTasks);
-    };
 
     return (
     <TaskWrapperStyle borderRadius={"0 10px 10px 10px"}>
         
         <div className="newInput--wrapper">
-            <AddNewButtonStyle onClick={handleAddTask}><img src={addCircle} alt="add new task"/></AddNewButtonStyle>
+            <AddNewButtonStyle onClick={createPost}><img src={addCircle} alt="add new task"/></AddNewButtonStyle>
             <AddNewInputStyle
                 type="text"
-                value={newTask}
-                onChange={handleInputChange}
+                value={newPostTask}
+                onChange={(e) => setNewPostTask(e.target.value)}
                 placeholder="Enter a new task"
             />
         </div>
         
         <ul>
-            {tasks.map((task, index) => (
-            <li key={index}>
+            {posts.map((post) => (
+            <li key={post.id}>
                 <input
                 type="checkbox"
-                onChange={() => handleTaskCompletion(index)}
+                checked={post.checked || false}
+                onChange={() => handleCheckboxChange(post.id)}
                 />
 
-                {task}
-                <button onClick={() => handleDeleteTask(index)}>Delete</button>
+                {post.name} - {post.date}
                 
+                <button onClick={() => deletePost(post.id)}>Delete</button>
             </li>
             ))}
         </ul>
