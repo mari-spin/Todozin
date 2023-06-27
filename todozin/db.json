@@ -1,17 +1,14 @@
 {
-  "list": [
+  "tasks": [
     {
       "id": 1,
       "name": "Personal",
-      "description": "My daily stuff",
-      "icon": ""
+      "description": "My daily stuff"
     },
     {
       "id": 2,
       "name": "Market",
-      "description": "My market list",
-      "icon": ""
+      "description": "My market list"
     }
-  ],
-  "task": []
+  ]
 }

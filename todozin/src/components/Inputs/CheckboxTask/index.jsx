@@ -1,81 +1,24 @@
 import { AddNewButtonStyle, AddNewInputStyle, TaskWrapperStyle } from "../style";
 
-import { useEffect, useState } from "react";
-
-import axios from "axios";
 import addCircle from "../../../assets/icon/addcircle.svg";
 
+import { useContext } from "react";
+import { TaskContext } from "../../../context/TaskContext";
+
 const CheckboxTask = () => {
-    const [posts, setPosts] = useState([])
-    const [newPostTask, setNewPostTask] = useState('');
-    const [completedPosts, setCompletedPosts] = useState([]);
-
-    const urlTask = "http://localhost:3000/task"
+    const {
+        posts,
+        newPostTask,
+        completedPosts,
+        showCompleted,
+        setNewPostTask,
+        createPost,
+        handleCheckboxChange,
+        toggleShowCompleted,
+        undoComplete,
+        deletePost
+    } = useContext(TaskContext)
     
-    useEffect(() => {
-        fetchPosts()
-    }, [])
-
-    const fetchPosts = async () => {
-        try {
-            const response = await axios.get(urlTask)
-            setPosts(response.data)
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    const createPost = async () => {
-        try {
-            const currentDate = new Date().toLocaleDateString('en-US', {
-                month: 'numeric',
-                day: 'numeric',
-                year: 'numeric'
-            });
-
-            const response = await axios.post(urlTask, {
-                name: newPostTask,
-                date: currentDate,
-                description: null,
-                checked:false
-            })
-            setPosts([...posts, response.data])
-            setNewPostTask('')
-        } catch (error) {
-            console.error(error)
-        }
-    }
-
-    const handleCheckboxChange = (postsId) => {
-        const updatedPosts = posts.map((post) => {
-            if (post.id === postsId) {
-                return {
-                    ...post,
-                    checked: !post.checked
-                }
-            }
-            return post
-        })
-        setPosts(updatedPosts)
-    }
-
-    useEffect(() => {
-        const completed = posts.filter((post) =>post.checked)
-        setCompletedPosts(completed)
-    }, [posts])
-
-    const deletePost = async (postId) => {
-        try {
-            await axios.delete(`${urlTask}/${postId}`);
-            const updatedPosts = posts.filter((post) => post.id !== postId);
-            setPosts(updatedPosts);
-        } 
-        catch (error) {
-            console.error(error);
-        }
-    };
-    
-
     return (
     <TaskWrapperStyle borderRadius={"0 10px 10px 10px"}>
         
@@ -86,11 +29,14 @@ const CheckboxTask = () => {
                 value={newPostTask}
                 onChange={(e) => setNewPostTask(e.target.value)}
                 placeholder="Enter a new task"
-            />
+                />
         </div>
+        
+        <h3>Active Tasks</h3>
         
         <ul>
             {posts.map((post) => (
+            post.checked == false &&
             <li key={post.id}>
                 <input
                 type="checkbox"
@@ -102,15 +48,29 @@ const CheckboxTask = () => {
             </li>
             ))}
         </ul>
-        <h2>Concluded Tasks</h2>
-        <ul>
-            {completedPosts.map((post) => (
-                <li key={post.id}>
-                    {post.name} - {post.date}
-                </li>
-            ))}
-        </ul>
-    </TaskWrapperStyle>
+
+        <div>
+            <input
+            type="checkbox"
+            checked={showCompleted}
+            onChange={toggleShowCompleted}
+            />
+            <label htmlFor="showCompleted">Show Completed Tasks</label>
+        </div>
+            {showCompleted && (
+                <>
+                    <h3>Concluded Tasks</h3>
+                    <ul>
+                        {completedPosts.map((post) => (
+                            <li key={post.id}>
+                            {post.name} - {post.date}
+                            <button onClick={() => undoComplete(post.id)}>Undo</button>
+                        </li>
+                        ))}
+                    </ul>
+                </>
+            )}
+        </TaskWrapperStyle>
     )
 }
 

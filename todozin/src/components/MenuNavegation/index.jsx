@@ -1,7 +1,6 @@
 import avocadoCoffee from "../../assets/abacate/avocadoCoffee.svg"
 
 import HeaderMenu from "./Header"
-import ListMenuSection from "./ListSection"
 import SearchBar from "./SearchBar"
 import TaskMenuSection from "./TaskSection"
 
@@ -15,7 +14,6 @@ const Menu = () => {
             <SearchBar/>
             <nav>
                 <TaskMenuSection/>
-                <ListMenuSection/>
             </nav>
         </MenuSectionStyle>
     )
