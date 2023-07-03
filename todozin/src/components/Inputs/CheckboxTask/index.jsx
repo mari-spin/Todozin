@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import addCircle from "../../../assets/icon/addcircle.svg";
 
 import { useContext } from "react";
-import { DateContext } from "../../../context/DateContext";
 import { TaskContext } from "../../../context/TaskContext";
 
 const CheckboxTask = ({allTasks, filterDate}) => {
@@ -14,6 +13,7 @@ const CheckboxTask = ({allTasks, filterDate}) => {
     const {
         posts,
         newPostTask,
+        todayTasks,
         completedPosts,
         showCompleted,
         setNewPostTask,
@@ -24,8 +24,7 @@ const CheckboxTask = ({allTasks, filterDate}) => {
         deletePost
     } = useContext(TaskContext)
     
-    const { filteredTasks } = useContext(DateContext)
-    
+
     return (
     <TaskWrapperStyle radius={"0 10px 10px 10px"}>
         
@@ -34,9 +33,9 @@ const CheckboxTask = ({allTasks, filterDate}) => {
             <AddNewInputStyle
                 type="text"
                 value={newPostTask}
-                onChange={(e) => setNewPostTask(e.target.value)}
+                onChange={(e) => {setNewPostTask(e.target.value)}}
                 placeholder="Enter a new task"
-                />
+            />
         </div>
         
         <h3>Active Tasks</h3>
@@ -44,7 +43,7 @@ const CheckboxTask = ({allTasks, filterDate}) => {
         <ul>
             {
                 filterDate &&
-                    filteredTasks.map((post) => (
+                    todayTasks.map((post) => (
                         post.checked == false &&
                         <li key={post.id}>
                             <input
@@ -52,7 +51,7 @@ const CheckboxTask = ({allTasks, filterDate}) => {
                             checked={post.checked || false}
                             onChange={() => handleCheckboxChange(post.id)}
                             />
-                                {post.name} - {post.date}
+                                {todayTasks.name} - {todayTasks.date}
                             <button onClick={() => deletePost(post.id)}>Delete</button>
                         </li>
                         ))

@@ -8,7 +8,10 @@ export const TaskContext = createContext()
 export const TaskProvider = ({children}) => {
 
     const [posts, setPosts] = useState([])
-    const [newPostTask, setNewPostTask] = useState('');
+    const [todayTasks, setTodayTasks ] = useState([])
+
+    const [newPostTask, setNewPostTask] = useState(''); //valor do input
+
     const [completedPosts, setCompletedPosts] = useState([]);
     const [showCompleted, setShowCompleted] = useState(true);
     
@@ -18,12 +21,20 @@ export const TaskProvider = ({children}) => {
         fetchPosts()
     }, [])
 
+    useEffect(() => {
+        console.log("All Posts:", posts)
+        console.log("Today:", todayTasks)
+    }, [posts, todayTasks])
+
     const fetchPosts = async () => {
         try {
             const response = await axios.get(urlTask)
+            
+            console.log('All Tasks:',response.data);
             setPosts(response.data)
-            console.log('All Posts:', response.data);
-
+            
+            console.log('Today Tasks:',response.data);
+            setTodayTasks(response.data)
         } catch (error) {
             console.error(error);
         }
@@ -47,8 +58,22 @@ export const TaskProvider = ({children}) => {
                 date: currentDate,
                 checked:false
             })
+            
             setPosts([...posts, response.data])
             setNewPostTask('')
+
+
+            const filteredArray = posts.filter(task => {
+                const todayDate = new Date(task.date).toLocaleDateString('en-US', {
+                    month: 'numeric',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                return todayDate === currentDate;
+            });
+            
+            setTodayTasks([...todayTasks, filteredArray])
+            
         } catch (error) {
             console.error(error)
         }
@@ -68,7 +93,8 @@ export const TaskProvider = ({children}) => {
     }
 
     useEffect(() => {
-        const completed = posts.filter((post) =>post.checked)
+        const completed = posts.filter((post) => post.checked)
+
         setCompletedPosts(completed)
     }, [posts])
 
@@ -101,6 +127,7 @@ export const TaskProvider = ({children}) => {
             await axios.delete(`${urlTask}/${postId}`);
             const updatedPosts = posts.filter((post) => post.id !== postId);
             setPosts(updatedPosts);
+            setTodayTasks(updatedPosts);
         } 
         catch (error) {
             console.error(error);
@@ -114,6 +141,7 @@ export const TaskProvider = ({children}) => {
             value={{
                 posts,
                 newPostTask,
+                todayTasks,
                 completedPosts,
                 showCompleted,
                 setNewPostTask,
