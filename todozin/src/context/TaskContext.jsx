@@ -30,11 +30,25 @@ export const TaskProvider = ({children}) => {
         try {
             const response = await axios.get(urlTask)
             
-            console.log('All Tasks:',response.data);
-            setPosts(response.data)
+            const currentDate = new Date().toLocaleDateString('en-US', {
+                month: 'numeric',
+                day: 'numeric',
+                year: 'numeric'
+            });
+
+            const allTasks = response.data
+            setPosts(allTasks)
             
-            console.log('Today Tasks:',response.data);
-            setTodayTasks(response.data)
+            const todayTasks = allTasks.filter((task) => {
+                const todayDate = new Date(task.date).toLocaleDateString('en-US', {
+                    month: 'numeric',
+                    day: 'numeric',
+                    year: 'numeric',
+                });
+                return todayDate === currentDate;
+            });
+
+            setTodayTasks(todayTasks);
         } catch (error) {
             console.error(error);
         }
@@ -59,20 +73,21 @@ export const TaskProvider = ({children}) => {
                 checked:false
             })
             
-            setPosts([...posts, response.data])
+            // Update the posts state with the newly created task
+            setPosts([...posts, response.data]);
             setNewPostTask('')
 
 
-            const filteredArray = posts.filter(task => {
-                const todayDate = new Date(task.date).toLocaleDateString('en-US', {
-                    month: 'numeric',
-                    day: 'numeric',
-                    year: 'numeric'
-                });
-                return todayDate === currentDate;
+             // Check if the newly created task is for today and add it to todayTasks state
+            const todayDate = new Date(response.data.date).toLocaleDateString('en-US', {
+                month: 'numeric',
+                day: 'numeric',
+                year: 'numeric',
             });
             
-            setTodayTasks([...todayTasks, filteredArray])
+            if (todayDate === currentDate) {
+                setTodayTasks([...todayTasks, response.data]);
+            }
             
         } catch (error) {
             console.error(error)
