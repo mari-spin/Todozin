@@ -6,17 +6,17 @@ import todayIcon from "../../../assets/icon/today.svg"
 
 import { ListContainer, ListItemStyle, ListStyle } from "../style"
 
-const TaskMenuSection = () => {.0
+const TaskMenuSection = () => {
     return (
         <ul>
             <ListContainer>
                 Tasks
                 <ListStyle>
                     <ListItemStyle>
-                        <Link to="/"><img src={todayIcon}/>Today</Link>
+                        <Link to="/"><img src={allIcon}/>All</Link>
                     </ListItemStyle>
                     <ListItemStyle>
-                        <Link to="all"><img src={allIcon}/>All</Link>
+                        <Link to="today"><img src={todayIcon}/>Today</Link>
                     </ListItemStyle>
                     <ListItemStyle>
                         <Link to="calendar">

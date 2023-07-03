@@ -1,11 +1,16 @@
+/* eslint-disable no-undef */
 import { AddNewButtonStyle, AddNewInputStyle, TaskWrapperStyle } from "../style";
+
+import PropTypes from 'prop-types';
 
 import addCircle from "../../../assets/icon/addcircle.svg";
 
 import { useContext } from "react";
+import { DateContext } from "../../../context/DateContext";
 import { TaskContext } from "../../../context/TaskContext";
 
-const CheckboxTask = () => {
+const CheckboxTask = ({allTasks, filterDate}) => {
+
     const {
         posts,
         newPostTask,
@@ -19,8 +24,10 @@ const CheckboxTask = () => {
         deletePost
     } = useContext(TaskContext)
     
+    const { filteredTasks } = useContext(DateContext)
+    
     return (
-    <TaskWrapperStyle borderRadius={"0 10px 10px 10px"}>
+    <TaskWrapperStyle radius={"0 10px 10px 10px"}>
         
         <div className="newInput--wrapper">
             <AddNewButtonStyle onClick={createPost}><img src={addCircle} alt="add new task"/></AddNewButtonStyle>
@@ -35,18 +42,36 @@ const CheckboxTask = () => {
         <h3>Active Tasks</h3>
         
         <ul>
-            {posts.map((post) => (
-            post.checked == false &&
-            <li key={post.id}>
-                <input
-                type="checkbox"
-                checked={post.checked || false}
-                onChange={() => handleCheckboxChange(post.id)}
-                />
-                    {post.name} - {post.date}
-                <button onClick={() => deletePost(post.id)}>Delete</button>
-            </li>
-            ))}
+            {
+                filterDate &&
+                    filteredTasks.map((post) => (
+                        post.checked == false &&
+                        <li key={post.id}>
+                            <input
+                            type="checkbox"
+                            checked={post.checked || false}
+                            onChange={() => handleCheckboxChange(post.id)}
+                            />
+                                {post.name} - {post.date}
+                            <button onClick={() => deletePost(post.id)}>Delete</button>
+                        </li>
+                        ))
+            }
+            {
+                allTasks &&   
+                    posts.map((post) => (
+                        post.checked == false &&
+                        <li key={post.id}>
+                            <input
+                            type="checkbox"
+                            checked={post.checked || false}
+                            onChange={() => handleCheckboxChange(post.id)}
+                            />
+                                {post.name} - {post.date}
+                            <button onClick={() => deletePost(post.id)}>Delete</button>
+                        </li>
+                        ))
+            }
         </ul>
 
         <div>
@@ -73,5 +98,10 @@ const CheckboxTask = () => {
         </TaskWrapperStyle>
     )
 }
+
+CheckboxTask.propTypes = {
+    filterDate: PropTypes.bool,
+    allTasks: PropTypes.bool,
+};
 
 export default CheckboxTask

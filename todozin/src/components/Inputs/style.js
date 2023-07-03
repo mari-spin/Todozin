@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 export const TaskWrapperStyle = styled.div`
     background-color: var(--beige);
 
-    border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : "15px")};
+    border-radius: ${({ radius }) => (radius ? radius : "15px")};
     
     padding: 2vh 3vw;
     min-height: 70vh;
@@ -34,6 +34,6 @@ export const AddNewButtonStyle = styled.button`
     border: 0 none;
 
     position: absolute;
-    top: 10px;
+    top: 15px;
     left: 0;
 `

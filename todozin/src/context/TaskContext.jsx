@@ -1,8 +1,11 @@
 import axios from 'axios';
 import { createContext, useEffect, useState } from 'react';
-const TaskContext = createContext()
 
-const TaskProvider = ({children}) => {
+import PropTypes from 'prop-types';
+
+export const TaskContext = createContext()
+
+export const TaskProvider = ({children}) => {
 
     const [posts, setPosts] = useState([])
     const [newPostTask, setNewPostTask] = useState('');
@@ -19,6 +22,8 @@ const TaskProvider = ({children}) => {
         try {
             const response = await axios.get(urlTask)
             setPosts(response.data)
+            console.log('All Posts:', response.data);
+
         } catch (error) {
             console.error(error);
         }
@@ -40,7 +45,6 @@ const TaskProvider = ({children}) => {
             const response = await axios.post(urlTask, {
                 name: newPostTask,
                 date: currentDate,
-                description: null,
                 checked:false
             })
             setPosts([...posts, response.data])
@@ -125,6 +129,7 @@ const TaskProvider = ({children}) => {
     )
 }
 
-
-export { TaskContext, TaskProvider };
+TaskProvider.propTypes = {
+    children: PropTypes.node.isRequired
+};
 

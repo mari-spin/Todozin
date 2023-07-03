@@ -1,6 +1,7 @@
+import ContentSection from "../../components/ContentSection"
 import Menu from "../../components/MenuNavegation"
-import TodayTitle from "../../components/Title/TodayTitle"
-import TodaySection from "../../components/TodaySection"
+import TodayTitle from "../../components/Title"
+
 import { FlexWrapper } from "../../style/wrapper"
 import { TodayPageWrapper } from "./style"
 
@@ -10,8 +11,14 @@ const TodayPage = () => {
             <Menu/>
             
             <TodayPageWrapper>
-                <TodayTitle/>
-                <TodaySection/>
+                <TodayTitle>
+                    Todo zin
+                </TodayTitle>
+                
+                <ContentSection filterDate>
+                    Today
+                </ContentSection>
+
             </TodayPageWrapper>
         </FlexWrapper>
     )

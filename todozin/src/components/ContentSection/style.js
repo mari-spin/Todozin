@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 
-export const TodaySectionStyle= styled.section `
+export const SectionStyle= styled.section `
 
     h2{
         background-color: var(--beige);
