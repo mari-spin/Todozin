@@ -51,7 +51,7 @@ const CheckboxTask = ({allTasks, filterDate}) => {
                             checked={post.checked || false}
                             onChange={() => handleCheckboxChange(post.id)}
                             />
-                                {todayTasks.name} - {todayTasks.date}
+                                {post.name} - {post.date}
                             <button onClick={() => deletePost(post.id)}>Delete</button>
                         </li>
                         ))

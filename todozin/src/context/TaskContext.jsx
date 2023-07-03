@@ -90,13 +90,14 @@ export const TaskProvider = ({children}) => {
             return post
         })
         setPosts(updatedPosts)
+        setTodayTasks(updatedPosts)
     }
 
     useEffect(() => {
-        const completed = posts.filter((post) => post.checked)
+        const completed = posts.filter((post) => post.checked, todayTasks.checked)
 
         setCompletedPosts(completed)
-    }, [posts])
+    }, [posts, todayTasks])
 
     const toggleShowCompleted = () => {
         setShowCompleted(!showCompleted);
@@ -116,6 +117,15 @@ export const TaskProvider = ({children}) => {
             })
             
             setPosts(updatedPosts)
+
+            const updatedTodayPosts = todayTasks.map((post) => {
+                if (post.id === postId) {
+                    return response.data
+                }
+                return post
+            })
+            
+            setTodayTasks(updatedTodayPosts)
 
         } catch (error) {
             console.error(error)
