@@ -6,7 +6,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
 
 import All from './Pages/All/index.jsx';
-import Calendar from './Pages/Calendar/index.jsx';
+import CalendarPage from './Pages/Calendar/index.jsx';
 import TodayPage from './Pages/Today/index.jsx';
 import { TaskProvider } from './context/TaskContext.jsx';
 import ErrorPage from './error/error-page.jsx';
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
   },
   {
     path:"calendar",
-    element:<Calendar/>,
+    element:<CalendarPage/>,
     errorElement: <ErrorPage />, 
     
   }
